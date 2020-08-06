@@ -1,0 +1,26 @@
+{
+  "name": "leaflet-svgicon-scalable",
+  "version": "0.0.3",
+  "description": "TeCHiScy's fork of leaflet-svgicon",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TeCHiScy/leaflet-svgicon.git"
+  },
+  "author": "TeCHiScy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TeCHiScy/leaflet-svgicon/issues"
+  },
+  "homepage": "https://github.com/TeCHiScy/leaflet-svgicon#readme",
+  "keywords": [
+    "leaflet",
+    "svg",
+    "icon",
+    "marker",
+    "scale"
+  ]
+}

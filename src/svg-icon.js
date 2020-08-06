@@ -1,9 +1,4 @@
-//Leaflet-SVGIcon
-//SVG icon for any marker class
-//Ilya Atkin
-//ilya.atkin@unh.edu
-
-L.DivIcon.SVGIcon = L.DivIcon.extend({
+var SVGIcon = L.DivIcon.extend({
   options: {
     circleText: "",
     className: "svg-icon",
@@ -28,7 +23,7 @@ L.DivIcon.SVGIcon = L.DivIcon.extend({
     weight: 2,
     scale: 1,
   },
-  initialize: function (options) {
+  initialize(options) {
     options = L.Util.setOptions(this, options);
 
     //iconSize needs to be converted to a Point object if it is not passed as one
@@ -77,7 +72,7 @@ L.DivIcon.SVGIcon = L.DivIcon.extend({
 
     options.html = this._createSVG();
   },
-  _createCircle: function () {
+  _createCircle() {
     const cx = Number(this.options.circleAnchor.x);
     const cy = Number(this.options.circleAnchor.y);
     const radius =
@@ -89,8 +84,7 @@ L.DivIcon.SVGIcon = L.DivIcon.extend({
     const strokeWidth = this.options.circleWeight;
     const className = this.options.className + "-circle";
 
-    var circle =
-      '<circle class="' +
+    return '<circle class="' +
       className +
       '" cx="' +
       cx +
@@ -109,19 +103,17 @@ L.DivIcon.SVGIcon = L.DivIcon.extend({
       '" stroke-width="' +
       strokeWidth +
       '"/>';
-
-    return circle;
   },
-  _createPathDescription: function () {
-    var height = Number(this.options.iconSize.y);
-    var width = Number(this.options.iconSize.x);
-    var weight = Number(this.options.weight);
-    var margin = weight / 2;
+  _createPathDescription() {
+    const height = Number(this.options.iconSize.y);
+    const width = Number(this.options.iconSize.x);
+    const weight = Number(this.options.weight);
+    const margin = weight / 2;
 
-    var startPoint = "M " + margin + " " + width / 2 + " ";
-    var leftLine = "L " + width / 2 + " " + (height - weight) + " ";
-    var rightLine = "L " + (width - margin) + " " + width / 2 + " ";
-    var arc =
+    const startPoint = "M " + margin + " " + width / 2 + " ";
+    const leftLine = "L " + width / 2 + " " + (height - weight) + " ";
+    const rightLine = "L " + (width - margin) + " " + width / 2 + " ";
+    const arc =
       "A " +
       width / 4 +
       " " +
@@ -132,19 +124,17 @@ L.DivIcon.SVGIcon = L.DivIcon.extend({
       width / 2 +
       " Z";
 
-    var d = startPoint + leftLine + rightLine + arc;
-
-    return d;
+    return startPoint + leftLine + rightLine + arc;
   },
   _createPath() {
-    var scale = this.options.scale;
-    var pathDescription = this._createPathDescription();
-    var strokeWidth = this.options.weight / scale;
-    var stroke = this.options.color;
-    var strokeOpacity = this.options.opacity;
-    var fill = this.options.fillColor;
-    var fillOpacity = this.options.fillOpacity;
-    var className = this.options.className + "-path";
+    const scale = this.options.scale;
+    const pathDescription = this._createPathDescription();
+    const strokeWidth = this.options.weight / scale;
+    const stroke = this.options.color;
+    const strokeOpacity = this.options.opacity;
+    const fill = this.options.fillColor;
+    const fillOpacity = this.options.fillOpacity;
+    const className = this.options.className + "-path";
 
     return '<path class="' +
       className +
@@ -191,19 +181,18 @@ L.DivIcon.SVGIcon = L.DivIcon.extend({
       "</svg>";
   },
   _createText() {
-    var fontSize = this.options.fontSize + "px";
-    var fontWeight = this.options.fontWeight;
-    var lineHeight = Number(this.options.fontSize);
+    const fontSize = this.options.fontSize + "px";
+    const fontWeight = this.options.fontWeight;
+    const lineHeight = Number(this.options.fontSize);
 
-    var x = this.options.circleAnchor.x;
-    var y = this.options.circleAnchor.y + lineHeight * 0.35; //35% was found experimentally
-    var circleText = this.options.circleText;
-    var textColor = this.options.fontColor
+    const x = this.options.circleAnchor.x;
+    const y = this.options.circleAnchor.y + lineHeight * 0.35; //35% was found experimentally
+    const circleText = this.options.circleText;
+    const textColor = this.options.fontColor
       .replace("rgb(", "rgba(")
       .replace(")", "," + this.options.fontOpacity + ")");
 
-    var text =
-      '<text text-anchor="middle" x="' +
+    return '<text text-anchor="middle" x="' +
       x +
       '" y="' +
       y +
@@ -216,8 +205,6 @@ L.DivIcon.SVGIcon = L.DivIcon.extend({
       '">' +
       circleText +
       "</text>";
-
-    return text;
   },
 });
 
@@ -230,25 +217,25 @@ L.Marker.SVGMarker = L.Marker.extend({
     iconFactory: L.divIcon.svgIcon,
     iconOptions: {},
   },
-  initialize: function (latlng, options) {
+  initialize(latlng, options) {
     options = L.Util.setOptions(this, options);
     options.icon = options.iconFactory(options.iconOptions);
     this._latlng = latlng;
   },
-  onAdd: function (map) {
+  onAdd(map) {
     L.Marker.prototype.onAdd.call(this, map);
   },
-  setStyle: function (style) {
+  setStyle(style) {
     if (this._icon) {
-      var svg = this._icon.children[0];
-      var iconBody = this._icon.children[0].children[0];
-      var iconCircle = this._icon.children[0].children[1];
+      let svg = this._icon.children[0];
+      let iconBody = this._icon.children[0].children[0];
+      let iconCircle = this._icon.children[0].children[1];
 
       if (style.color && !style.iconOptions) {
-        var stroke = style.color
+        const stroke = style.color
           .replace("rgb", "rgba")
           .replace(")", "," + this.options.icon.options.opacity + ")");
-        var fill = style.color
+        const fill = style.color
           .replace("rgb", "rgba")
           .replace(")", "," + this.options.icon.options.fillOpacity + ")");
         iconBody.setAttribute("stroke", stroke);
@@ -266,7 +253,7 @@ L.Marker.SVGMarker = L.Marker.extend({
         if (style.color) {
           style.iconOptions.color = style.color;
         }
-        var iconOptions = L.Util.setOptions(
+        let iconOptions = L.Util.setOptions(
           this.options.icon,
           style.iconOptions
         );
@@ -276,6 +263,11 @@ L.Marker.SVGMarker = L.Marker.extend({
   },
 });
 
-L.marker.svgMarker = function (latlng, options) {
+var SVGMarker = function (latlng, options) {
   return new L.Marker.SVGMarker(latlng, options);
 };
+
+module.exports = {
+  SVGMarker: SVGMarker,
+  SVGIcon: SVGIcon
+}
