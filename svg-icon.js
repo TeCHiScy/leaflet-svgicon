@@ -78,16 +78,16 @@ L.DivIcon.SVGIcon = L.DivIcon.extend({
     options.html = this._createSVG();
   },
   _createCircle: function () {
-    var cx = Number(this.options.circleAnchor.x);
-    var cy = Number(this.options.circleAnchor.y);
-    var radius =
+    const cx = Number(this.options.circleAnchor.x);
+    const cy = Number(this.options.circleAnchor.y);
+    const radius =
       (this.options.iconSize.x / 2) * Number(this.options.circleRatio);
-    var fill = this.options.circleFillColor;
-    var fillOpacity = this.options.circleFillOpacity;
-    var stroke = this.options.circleColor;
-    var strokeOpacity = this.options.circleOpacity;
-    var strokeWidth = this.options.circleWeight;
-    var className = this.options.className + "-circle";
+    const fill = this.options.circleFillColor;
+    const fillOpacity = this.options.circleFillOpacity;
+    const stroke = this.options.circleColor;
+    const strokeOpacity = this.options.circleOpacity;
+    const strokeWidth = this.options.circleWeight;
+    const className = this.options.className + "-circle";
 
     var circle =
       '<circle class="' +
