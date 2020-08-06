@@ -136,7 +136,7 @@ L.DivIcon.SVGIcon = L.DivIcon.extend({
 
     return d;
   },
-  _createPath: function () {
+  _createPath() {
     var scale = this.options.scale;
     var pathDescription = this._createPathDescription();
     var strokeWidth = this.options.weight / scale;
@@ -146,8 +146,7 @@ L.DivIcon.SVGIcon = L.DivIcon.extend({
     var fillOpacity = this.options.fillOpacity;
     var className = this.options.className + "-path";
 
-    var path =
-      '<path class="' +
+    return '<path class="' +
       className +
       '" d="' +
       pathDescription +
@@ -162,25 +161,22 @@ L.DivIcon.SVGIcon = L.DivIcon.extend({
       '" fill-opacity="' +
       fillOpacity +
       '"/>';
-
-    return path;
   },
-  _createSVG: function () {
-    var scale = this.options.scale;
-    var path = this._createPath();
-    var circle = this._createCircle();
-    var text = this._createText();
-    var className = this.options.className + "-svg";
+  _createSVG() {
+    const scale = this.options.scale;
+    const path = this._createPath();
+    const circle = this._createCircle();
+    const text = this._createText();
+    const className = this.options.className + "-svg";
 
-    var style =
+    const style =
       "width:" +
       this.options.iconSize.x +
       "px; height:" +
       this.options.iconSize.y +
       "px;";
 
-    var svg =
-      '<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 ' +
+    return '<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 ' +
       this.options.iconSize.x / scale +
       " " +
       this.options.iconSize.y / scale +
@@ -193,10 +189,8 @@ L.DivIcon.SVGIcon = L.DivIcon.extend({
       circle +
       text +
       "</svg>";
-
-    return svg;
   },
-  _createText: function () {
+  _createText() {
     var fontSize = this.options.fontSize + "px";
     var fontWeight = this.options.fontWeight;
     var lineHeight = Number(this.options.fontSize);
